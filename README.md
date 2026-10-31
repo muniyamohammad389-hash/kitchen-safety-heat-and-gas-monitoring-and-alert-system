@@ -2,7 +2,7 @@
 
 An embedded C project for an **LPC21xx (ARM7)** microcontroller that watches kitchen temperature and gas levels, raises a buzzer and LED alarm when either becomes unsafe, and logs the most recent event with a timestamp. A keypad-driven, password-protected menu lets the user adjust the clock, the alarm limits and the password.
 
-**Vector ID shown on splash screen:** `V25HE11B5`
+**Vector ID shown on splash screen:** `V25HE11M4`
 
 ---
 
@@ -191,4 +191,4 @@ Switch1 press -> Enter Password -> (3 wrong -> 10 s lock, then retry)
 
 ## Author
 
-Project by Vector ID **V25HE11B5**.
+Project by Vector ID **V25HE11M4**.
