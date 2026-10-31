@@ -8,8 +8,12 @@ Measures temperature and gas level, shows them live with a real-time clock, and 
 ![Language](https://img.shields.io/badge/Language-Embedded%20C-green)
 ![Sensors](https://img.shields.io/badge/Sensors-LM35%20%7C%20MQ--2-red)
 
-![Block diagram of the kitchen safety system](images/block_diagram.png)
-*System block diagram*
+<p align="center">
+  <img width="601" height="440" alt="Block diagram of the kitchen safety system" src="https://github.com/user-attachments/assets/77b90455-faad-443c-9160-079423600d65" />
+  <br/>
+  <sub><i>System block diagram</i></sub>
+</p>
+
 
 ---
 
@@ -76,9 +80,18 @@ The system continuously reads an **LM35** temperature sensor and an **MQ-2** gas
 
 ### 📷 Hardware Photos
 
-| Labeled hardware overview | Hardware with keypad connected |
-|---|---|
-| ![Labeled hardware overview](images/hardware_labeled.jpg) | ![Setup with the keypad connected](images/hardware_keypad.jpg) |
+<table align="center">
+  <tr>
+    <td align="center" width="50%">
+      <img width="100%" alt="Labeled hardware overview" src="https://github.com/user-attachments/assets/79616819-5b8a-40f1-8a41-15ab2f2a48fe" /><br/>
+      <sub><b>Labeled hardware overview</b></sub>
+    </td>
+    <td align="center" width="50%">
+      <img width="100%" alt="Hardware with keypad connected" src="https://github.com/user-attachments/assets/2c2352c4-acf6-4f5b-af07-5bb2c9a17e3a" /><br/>
+      <sub><b>Setup with the keypad connected</b></sub>
+    </td>
+  </tr>
+ <table>
 
 The 4x4 keypad plugs into the board through the flat ribbon cable.
 
@@ -202,7 +215,16 @@ DD/MM/YYYY S:x
 
 | Gas safe (`S:0`) | Gas above limit (`S:1`) |
 |---|---|
-| ![Normal screen, gas safe](images/normal_safe.jpg) | ![Normal screen, gas high](images/normal_gas.jpg) |
+<table align="center">
+  <tr>
+    <th align="center" width="50%">Gas safe (<code>S:0</code>)</th>
+    <th align="center" width="50%">Gas above limit (<code>S:1</code>)</th>
+  </tr>
+  <tr>
+    <td align="center"><img width="100%" alt="Normal screen, gas safe" src="https://github.com/user-attachments/assets/53544444-2789-4eed-94f6-908e30ecabc0" /></td>
+    <td align="center"><img width="100%" alt="Normal screen, gas high" src="https://github.com/user-attachments/assets/b28a05b3-c1b9-410f-a31b-5f4dc8a626a8" /></td>
+  </tr>
+</table>
 
 ### 3. Alarm and Alert
 When temperature or gas **first** goes above its limit:
@@ -214,7 +236,16 @@ When temperature or gas **first** goes above its limit:
 
 | Temperature alert | Gas alert |
 |---|---|
-| ![Temperature alert screen](images/alert_temp.jpg) | ![Gas alert screen](images/alert_gas.jpg) |
+<table align="center">
+  <tr>
+    <th align="center" width="50%">Temperature alert</th>
+    <th align="center" width="50%">Gas alert</th>
+  </tr>
+  <tr>
+    <td align="center"><img width="100%" alt="Temperature alert screen" src="https://github.com/user-attachments/assets/d4a71d7b-f4ef-4066-8e9c-954abd9936b2" /></td>
+    <td align="center"><img width="100%" alt="Gas alert screen" src="https://github.com/user-attachments/assets/ad606707-162c-4ead-bd1c-d4ffdd96124c" /></td>
+  </tr>
+</table>
 
 **Last-event popup:** every 10 seconds (once at least one event has happened), the last alarm event (time and value) is shown for 3 seconds. The buzzer stays silent during the popup.
 
@@ -222,8 +253,14 @@ When temperature or gas **first** goes above its limit:
 H:M:S T:45°C      <- last event was temperature
 H:M:S S:1         <- last event was gas
 ```
-
-![Alarm logic](images/alarm_logic.png)
+```mermaid
+flowchart LR
+    A["Read sensors"] --> B{"Above limit?"}
+    B -- "Yes" --> C["Buzzer + LED ON<br/>Alert for 2.5 s"]
+    B -- "No" --> D["Buzzer + LED OFF"]
+    C --> E["Normal screen"]
+    D --> E
+```
 
 ### 4. Open the Settings Menu
 1. Press **Switch 1** (any alarm is silenced when the menu opens).
