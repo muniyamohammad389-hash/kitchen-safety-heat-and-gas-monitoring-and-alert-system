@@ -188,7 +188,7 @@ The Vector ID and project title should now appear on the LCD.
 ## 🕹️ How to Use
 
 ### 1. Start-up
-The LCD first shows the **Vector ID** (`V25HE11B5`) for 2 seconds, then the project title scrolls across the second line. After that the normal screen appears.
+The LCD first shows the **Vector ID** (`V25HE11M4`) for 2 seconds, then the project title scrolls across the second line. After that the normal screen appears.
 
 ### 2. Normal Screen
 
@@ -380,5 +380,5 @@ Rebuild and flash again after any change. The alert duration is the `delay_ms(25
 
 ## 👤 Author
 
-**Balaji Pidikiti**
-Vector ID: `V25HE11B5`
+**MOHAMMAD MUNIYA**
+Vector ID: `V25HE11M4`
