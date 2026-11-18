@@ -267,10 +267,23 @@ flowchart LR
 2. Type the password on the keypad (digits appear as `*`).
 3. Press any non-digit key (for example `:`) to confirm. Press `C` to delete the last digit.
 
-| Password entry | Wrong password | Three wrong tries |
-|---|---|---|
-| ![Password entry screen](images/password.jpg) | ![Access denied screen](images/denied.jpg) | ![System locked countdown](images/locked.jpg) |
-| Digits appear as `*` | `Access Denied` and a short beep | `System Locked` for 10 s with a `Wait:` countdown, then the password is asked again |
+<table align="center">
+  <tr>
+    <th align="center" width="33%">Password entry</th>
+    <th align="center" width="33%">Wrong password</th>
+    <th align="center" width="33%">Three wrong tries</th>
+  </tr>
+  <tr>
+    <td align="center"><img width="100%" alt="Password entry screen" src="https://github.com/user-attachments/assets/73f7bf1b-e85e-4f7b-8dcf-b772f4bb9476" /></td>
+    <td align="center"><img width="100%" alt="Access denied screen" src="https://github.com/user-attachments/assets/f9d041b2-028b-4795-b4df-8f5851c40004" /></td>
+    <td align="center"><img width="100%" alt="System locked countdown" src="https://github.com/user-attachments/assets/375fb9cf-d285-4342-b072-3fec7f63a1e7" /></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Digits appear as <code>*</code></sub></td>
+    <td align="center"><sub><i>Access Denied</i> and a short beep</sub></td>
+    <td align="center"><sub>Locked for 10 s with a countdown, then the password is asked again</sub></td>
+  </tr>
+</table>
 
 **Keypad layout**
 
@@ -287,11 +300,20 @@ flowchart LR
 1.RTC 2.SETPT30     <- number = seconds left to choose
 3.PASS 4.EXIT
 ```
-
-| Settings menu | RTC menu |
-|---|---|
-| ![Settings menu](images/menu.jpg) | ![RTC menu](images/rtc_menu.jpg) |
-| Choose 1 to 4 | Set hour, minute, second, date, month, year |
+<table align="center">
+  <tr>
+    <th align="center" width="50%">Settings menu</th>
+    <th align="center" width="50%">RTC menu</th>
+  </tr>
+  <tr>
+    <td align="center"><img width="330" alt="Settings menu" src="https://github.com/user-attachments/assets/9d6e0b7c-2833-43a3-9e56-59e80ac557b0" /></td>
+    <td align="center"><img width="330" alt="RTC menu" src="https://github.com/user-attachments/assets/9bdc7a63-8c4c-44e0-b05f-64fb92acc3c6" /></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Choose 1 to 4</sub></td>
+    <td align="center"><sub>Set hour, minute, second, date, month, year</sub></td>
+  </tr>
+</table>
 
 The menu closes by itself after **30 seconds** without a key press.
 
@@ -302,7 +324,20 @@ The menu closes by itself after **30 seconds** without a key press.
 | `3` | **PASS** | Change the password: enter the current password, then the new one, then confirm it |
 | `4` | **EXIT** | Return to the normal screen |
 
-![Access and menu flow](images/menu_flow.png)
+#### Access and menu flow
+
+```mermaid
+flowchart LR
+    A["Press Switch 1"] --> B["Enter password"]
+    B --> C{"Correct?"}
+    C -- "No" --> E["Access Denied<br/>3 wrong = lock 10 s"]
+    E --> B
+    C -- "Yes" --> D["Settings menu"]
+    D --> F["1 RTC<br/>set clock and date"]
+    D --> G["2 SET<br/>temp / gas limit"]
+    D --> H["3 PASS<br/>change password"]
+    D --> I["4 EXIT<br/>normal screen"]
+```
 
 ### 6. RTC Menu
 
@@ -373,9 +408,16 @@ Rebuild and flash again after any change. The alert duration is the `delay_ms(25
 | 13 | Password, number entry, RTC, set-point and password menus, lock-out |
 | 14 | `main()` – the main loop |
 
-![Main loop](images/main_loop.png)
+### Main loop
 
-**Main loop in short:** check for the Switch 1 flag → read LM35 and MQ-2 → `check_for_danger()` → either run the last-event popup, or follow the danger flags for the buzzer/LED (with Switch 2 mute) and draw the normal screen.
+```mermaid
+flowchart LR
+    A["Check Switch 1"] --> B["Read sensors"]
+    B --> C["Check danger"]
+    C --> D["Buzzer / LED"]
+    D --> E["Show screen"]
+    E --> A
+```
 
 ---
 
